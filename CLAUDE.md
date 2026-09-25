@@ -10,7 +10,8 @@ only the current one.
 ## Commands
 <!-- Keep this section current as the repo evolves. -->
 - `pnpm i`: install
-- `docker compose up -d`: local Postgres (pgvector), Mailpit, MinIO
+- `docker compose up -d`: local Postgres (pgvector, pg_trgm, unaccent), Mailpit, S3-compatible
+  object storage (SeaweedFS — see `docs/adr/0004-local-object-storage.md` for why not MinIO)
 - `pnpm dev`: run web + api + worker
 - `pnpm db:migrate` / `pnpm db:generate` / `pnpm db:seed`
 - `pnpm test`, `pnpm typecheck`, `pnpm lint`, `pnpm build`

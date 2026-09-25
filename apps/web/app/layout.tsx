@@ -1,4 +1,4 @@
-import { brand } from "@pi/config/brand";
+import { brand } from "@repo/config/brand";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";

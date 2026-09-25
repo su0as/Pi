@@ -1,5 +1,5 @@
 {
-  "name": "@pi/web",
+  "name": "@repo/web",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
     "test": "echo \"no tests yet (Playwright e2e lands in M7)\""
   },
   "dependencies": {
-    "@pi/config": "workspace:*",
+    "@repo/config": "workspace:*",
     "next": "^16.3.6",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"

@@ -1,4 +1,4 @@
-import { loadApiEnv } from "@pi/config/env/api";
+import { loadApiEnv } from "@repo/config/env/api";
 import { Hono } from "hono";
 import pino from "pino";
 import { serve } from "./serve.js";
@@ -10,6 +10,6 @@ const logger = pino({
 
 const app = new Hono();
 
-app.get("/", (c) => c.json({ ok: true, service: "@pi/api" }));
+app.get("/", (c) => c.json({ ok: true, service: "@repo/api" }));
 
 serve(app, env, logger);

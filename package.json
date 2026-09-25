@@ -1,5 +1,5 @@
 {
-  "name": "pi-monorepo",
+  "name": "monorepo",
   "private": true,
   "packageManager": "pnpm@12.6.0",
   "engines": {
@@ -12,11 +12,11 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "typecheck": "turbo run typecheck",
-    "db:generate": "pnpm --filter @pi/db db:generate",
-    "db:migrate": "pnpm --filter @pi/db db:migrate",
-    "db:seed": "pnpm --filter @pi/db db:seed",
-    "api:openapi": "pnpm --filter @pi/api openapi:write",
-    "api-client:generate": "pnpm --filter @pi/api-client generate"
+    "db:generate": "pnpm --filter @repo/db db:generate",
+    "db:migrate": "pnpm --filter @repo/db db:migrate",
+    "db:seed": "pnpm --filter @repo/db db:seed",
+    "api:openapi": "pnpm --filter @repo/api openapi:write",
+    "api-client:generate": "pnpm --filter @repo/api-client generate"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",

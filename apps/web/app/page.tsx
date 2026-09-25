@@ -1,4 +1,4 @@
-import { brand } from "@pi/config/brand";
+import { brand } from "@repo/config/brand";
 
 export default function HomePage() {
   return (

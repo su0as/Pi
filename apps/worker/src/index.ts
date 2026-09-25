@@ -1,4 +1,4 @@
-import { loadWorkerEnv } from "@pi/config/env/worker";
+import { loadWorkerEnv } from "@repo/config/env/worker";
 import pino from "pino";
 
 // Job registration (pg-boss cron + queues: arxiv.harvest, work.enrich, ...)
@@ -9,4 +9,4 @@ const logger = pino({
   transport: env.NODE_ENV === "development" ? { target: "pino-pretty" } : undefined,
 });
 
-logger.info("@pi/worker booted (no jobs registered yet)");
+logger.info("@repo/worker booted (no jobs registered yet)");

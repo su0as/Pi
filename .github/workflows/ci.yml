@@ -61,5 +61,14 @@ jobs:
       - name: Build
         run: pnpm build
 
-      # A migration-drift check (`drizzle-kit generate --check` against the committed schema)
-      # is added once packages/db exists — see docs/adr and PROMPT_01_WEB.md milestone M1.
+      - name: Check for uncommitted migration drift
+        run: |
+          pnpm --filter @repo/db db:generate
+          git diff --exit-code -- packages/db/migrations || \
+            (echo "::error::Schema and committed migrations are out of sync — run 'pnpm --filter @repo/db db:generate' and commit the result." && exit 1)
+
+      - name: Apply migrations
+        run: pnpm --filter @repo/db db:migrate
+
+      - name: Run seed
+        run: pnpm --filter @repo/db db:seed

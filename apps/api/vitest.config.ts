@@ -5,7 +5,7 @@ export default defineConfig({
     environment: "node",
     server: {
       deps: {
-        inline: [/^@pi\//],
+        inline: [/^@repo\//],
       },
     },
   },
