@@ -34,6 +34,7 @@ pnpm-debug.log*
 # generated
 next-env.d.ts
 *.tsbuildinfo
+apps/api/openapi.json
 
 # object storage / db local volumes
 .minio/

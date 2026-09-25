@@ -55,20 +55,28 @@ jobs:
       - name: Lint
         run: pnpm lint
 
-      - name: Test
-        run: pnpm test
-
-      - name: Build
-        run: pnpm build
-
       - name: Check for uncommitted migration drift
         run: |
           pnpm --filter @repo/db db:generate
           git diff --exit-code -- packages/db/migrations || \
             (echo "::error::Schema and committed migrations are out of sync — run 'pnpm --filter @repo/db db:generate' and commit the result." && exit 1)
 
+      # Applied before Test: apps/api's integration tests (idempotency, rate limiting) hit real
+      # tables, not just a live connection.
       - name: Apply migrations
         run: pnpm --filter @repo/db db:migrate
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build
+
+      - name: Check for uncommitted api-client drift
+        run: |
+          pnpm --filter @repo/api-client generate
+          git diff --exit-code -- packages/api-client/src/schema.d.ts || \
+            (echo "::error::The OpenAPI spec and committed api-client types are out of sync — run 'pnpm api-client:generate' and commit the result." && exit 1)
 
       - name: Run seed
         run: pnpm --filter @repo/db db:seed

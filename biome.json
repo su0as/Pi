@@ -15,7 +15,8 @@
       "!**/coverage",
       "!**/node_modules",
       "!**/.turbo",
-      "!packages/db/migrations"
+      "!packages/db/migrations",
+      "!packages/api-client/src/schema.d.ts"
     ]
   },
   "formatter": {

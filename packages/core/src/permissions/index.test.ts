@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canRateNote, canReplyAsAuthor, canWriteNote, isAdmin, isModerator } from "./index";
+import { canRateNote, canReplyAsAuthor, canWriteNote, isAdmin, isModerator } from "./index.js";
 
 describe("isModerator / isAdmin", () => {
   it("treats admin as a moderator", () => {

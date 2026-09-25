@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseDoi } from "./doi";
+import { parseDoi } from "./doi.js";
 
 describe("parseDoi", () => {
   it("parses a bare DOI", () => {

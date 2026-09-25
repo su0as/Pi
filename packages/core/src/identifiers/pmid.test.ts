@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parsePmid } from "./pmid";
+import { parsePmid } from "./pmid.js";
 
 describe("parsePmid", () => {
   it("parses a PMID:-prefixed value", () => {

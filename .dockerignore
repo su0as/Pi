@@ -1,0 +1,17 @@
+node_modules
+**/node_modules
+**/.next
+**/dist
+**/.turbo
+**/coverage
+.git
+.claude
+apps/web
+!apps/web/package.json
+apps/mobile
+apps/extension
+packages/api-client
+!packages/api-client/package.json
+packages/db/migrations
+*.md
+docs

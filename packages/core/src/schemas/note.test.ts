@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createNoteInputSchema } from "./note";
+import { createNoteInputSchema } from "./note.js";
 
 const base = {
   workId: "0198f000-0000-7000-8000-000000000000",

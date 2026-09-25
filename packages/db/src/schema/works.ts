@@ -12,14 +12,14 @@ import {
   uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
-import { createdUpdatedAt, id } from "./_helpers";
+import { createdUpdatedAt, id } from "./_helpers.js";
 import {
   identifierSchemeEnum,
   readerDocumentFormatEnum,
   sourceIdEnum,
   workTypeEnum,
-} from "./enums";
-import { topics } from "./scholarly";
+} from "./enums.js";
+import { topics } from "./scholarly.js";
 
 /** Read-only placeholder for the `tsvector` column — Postgres computes it via a
  * `GENERATED ALWAYS AS (...) STORED` expression added in a hand-written custom migration

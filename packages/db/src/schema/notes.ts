@@ -1,8 +1,8 @@
 import { index, integer, jsonb, pgTable, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
-import { createdUpdatedAt, id } from "./_helpers";
-import { noteOriginEnum, noteRatingValueEnum, noteStatusEnum, noteTypeEnum } from "./enums";
-import { users } from "./users";
-import { works, workVersions } from "./works";
+import { createdUpdatedAt, id } from "./_helpers.js";
+import { noteOriginEnum, noteRatingValueEnum, noteStatusEnum, noteTypeEnum } from "./enums.js";
+import { users } from "./users.js";
+import { works, workVersions } from "./works.js";
 
 // docs/CONTEXT.md section 6.5 / 7
 export const notes = pgTable(

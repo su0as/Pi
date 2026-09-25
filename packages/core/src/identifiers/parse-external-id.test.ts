@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseExternalId } from "./parse-external-id";
+import { parseExternalId } from "./parse-external-id.js";
 
 describe("parseExternalId", () => {
   it("detects an arXiv id", () => {

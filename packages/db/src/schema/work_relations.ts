@@ -8,9 +8,9 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { id } from "./_helpers";
-import { institutions, persons, topics } from "./scholarly";
-import { works } from "./works";
+import { id } from "./_helpers.js";
+import { institutions, persons, topics } from "./scholarly.js";
+import { works } from "./works.js";
 
 // docs/CONTEXT.md section 6.1
 export const authorships = pgTable(

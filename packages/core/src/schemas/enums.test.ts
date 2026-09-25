@@ -4,7 +4,7 @@ import {
   noteTypeSchema,
   notificationTypeSchema,
   workTypeSchema,
-} from "./enums";
+} from "./enums.js";
 
 describe("DB-enum-backed schemas", () => {
   it("accepts a real note type and rejects a made-up one", () => {

@@ -1,5 +1,5 @@
 import type { z } from "zod";
-import type { userRoleSchema } from "../schemas/enums";
+import type { userRoleSchema } from "../schemas/enums.js";
 
 type UserRole = z.infer<typeof userRoleSchema>;
 

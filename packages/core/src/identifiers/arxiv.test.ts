@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseArxivId } from "./arxiv";
+import { parseArxivId } from "./arxiv.js";
 
 describe("parseArxivId", () => {
   it("parses a bare new-format id", () => {

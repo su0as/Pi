@@ -16,6 +16,11 @@ minimumReleaseAgeExclude:
   - '@vitest/spy@5.0.2'
   - turbo@2.11.4
   - vitest@5.0.2
+  - '@scalar/client-side-rendering@0.4.5'
+  - '@scalar/helpers@0.15.0'
+  - '@scalar/hono-api-reference@0.12.6'
+  - '@scalar/schemas@0.12.1'
+  - '@scalar/types@0.22.1'
 
 onlyBuiltDependencies:
   - "@biomejs/biome"

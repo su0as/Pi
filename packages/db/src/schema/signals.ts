@@ -8,15 +8,15 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { createdUpdatedAt, id } from "./_helpers";
+import { createdUpdatedAt, id } from "./_helpers.js";
 import {
   interactionEventTypeEnum,
   moderationActionEnum,
   reportStatusEnum,
   surfaceEnum,
-} from "./enums";
-import { users } from "./users";
-import { works } from "./works";
+} from "./enums.js";
+import { users } from "./users.js";
+import { works } from "./works.js";
 
 // docs/CONTEXT.md section 6.6 — "our own record of behavior ... source of truth. Partitioned by
 // month, with a retention policy."

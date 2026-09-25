@@ -1,6 +1,6 @@
-import { parseArxivId } from "./arxiv";
-import { parseDoi } from "./doi";
-import { parsePmid } from "./pmid";
+import { parseArxivId } from "./arxiv.js";
+import { parseDoi } from "./doi.js";
+import { parsePmid } from "./pmid.js";
 
 export type ExternalIdScheme = "arxiv" | "doi" | "pmid";
 

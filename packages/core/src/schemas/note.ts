@@ -1,7 +1,7 @@
 import { authorReplies, noteEvidence, noteRatings, notes } from "@repo/db/schema";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
-import { noteEvidenceKindSchema } from "./enums";
+import { noteEvidenceKindSchema } from "./enums.js";
 
 export const noteSchema = createSelectSchema(notes);
 // `kind` overridden to the curated app-level enum — the DB column is plain `text` (see

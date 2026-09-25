@@ -8,10 +8,10 @@ import {
   unique,
   uuid,
 } from "drizzle-orm/pg-core";
-import { createdUpdatedAt, id } from "./_helpers";
-import { libraryItemStatusEnum, surfaceEnum } from "./enums";
-import { users } from "./users";
-import { works, workVersions } from "./works";
+import { createdUpdatedAt, id } from "./_helpers.js";
+import { libraryItemStatusEnum, surfaceEnum } from "./enums.js";
+import { users } from "./users.js";
+import { works, workVersions } from "./works.js";
 
 // docs/CONTEXT.md section 6.3 — private by default.
 export const libraryItems = pgTable(

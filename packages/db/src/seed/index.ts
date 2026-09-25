@@ -1,6 +1,6 @@
 import { and, eq } from "drizzle-orm";
-import { createDb } from "../client";
-import { generateId } from "../id";
+import { createDb } from "../client.js";
+import { generateId } from "../id.js";
 import {
   affiliations,
   authorships,
@@ -12,11 +12,11 @@ import {
   works,
   workTopics,
   workVersions,
-} from "../schema";
-import { demoUserFixtures } from "./fixtures/demo-users";
-import { institutionFixtures } from "./fixtures/institutions";
-import { topicFixtures } from "./fixtures/topics";
-import { workFixtures } from "./fixtures/works";
+} from "../schema/index.js";
+import { demoUserFixtures } from "./fixtures/demo-users.js";
+import { institutionFixtures } from "./fixtures/institutions.js";
+import { topicFixtures } from "./fixtures/topics.js";
+import { workFixtures } from "./fixtures/works.js";
 
 type Db = ReturnType<typeof createDb>;
 

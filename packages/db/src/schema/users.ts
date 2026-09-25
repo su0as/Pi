@@ -1,5 +1,5 @@
 import { boolean, pgTable, primaryKey, text, timestamp, unique, uuid } from "drizzle-orm/pg-core";
-import { createdUpdatedAt, id, timestamps } from "./_helpers";
+import { createdUpdatedAt, id, timestamps } from "./_helpers.js";
 import {
   affiliationPositionEnum,
   affiliationVerificationMethodEnum,
@@ -9,8 +9,8 @@ import {
   pushPlatformEnum,
   userRoleEnum,
   userStatusEnum,
-} from "./enums";
-import { institutions, persons } from "./scholarly";
+} from "./enums.js";
+import { institutions, persons } from "./scholarly.js";
 
 // docs/CONTEXT.md section 6.2. Deliberately holds only the app-domain fields CONTEXT.md lists
 // here (handle, display_name, ...) — auth-specific fields (email, emailVerified, sessions,

@@ -1,7 +1,7 @@
 import type { AnyPgColumn } from "drizzle-orm/pg-core";
 import { pgTable, text, unique, uniqueIndex, uuid } from "drizzle-orm/pg-core";
-import { createdUpdatedAt, id } from "./_helpers";
-import { topicSchemeEnum } from "./enums";
+import { createdUpdatedAt, id } from "./_helpers.js";
+import { topicSchemeEnum } from "./enums.js";
 
 // docs/CONTEXT.md section 6.1 — people as authors, not app users (see schema/users.ts for those).
 export const persons = pgTable(
