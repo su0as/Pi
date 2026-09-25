@@ -14,7 +14,8 @@ even though Next.js itself would run on Node 20.
 ```bash
 pnpm i
 docker compose up -d
-pnpm db:migrate   # once packages/db exists (M1)
+pnpm db:migrate
+pnpm db:seed
 pnpm dev
 ```
 
@@ -24,7 +25,8 @@ Cloudflare R2 — see `docs/adr/0004-local-object-storage.md`) serves its S3 API
 http://localhost:8333 and a filer UI on http://localhost:8888.
 
 Copy each app's `.env.example` to `.env` before running (`apps/web/.env.example`,
-`apps/api/.env.example`, `apps/worker/.env.example`) — the defaults match `docker-compose.yml`.
+`apps/api/.env.example`, `apps/worker/.env.example`, `packages/db/.env.example`) — the defaults
+match `docker-compose.yml`.
 
 ## Repo layout
 
@@ -37,7 +39,9 @@ apps/
   extension/  placeholder — WXT browser extension, P2
 packages/
   config/     brand.ts + zod-validated env loaders, shared to every app
-  (db, core, api-client, sources, reader, design-tokens, emails — added as milestones land)
+  db/         Drizzle schema, migrations, seed script (packages/db/src/seed)
+  core/       generateId, arXiv/DOI/PMID identifier parsing, zod schemas, permission skeletons
+  (api-client, sources, reader, design-tokens, emails — added as later milestones land)
 docs/
   CONTEXT.md  product + engineering source of truth
   adr/        Architecture Decision Records
@@ -49,10 +53,11 @@ docs/
 - `docker compose up -d` — local Postgres (pgvector, pg_trgm, unaccent), Mailpit, MinIO
 - `pnpm dev` — run web + api + worker
 - `pnpm test`, `pnpm typecheck`, `pnpm lint`, `pnpm build`
-- `pnpm db:migrate` / `pnpm db:generate` / `pnpm db:seed` — wired once `packages/db` lands (M1)
+- `pnpm db:migrate` — apply migrations; `pnpm db:generate` — generate a migration from schema
+  changes; `pnpm db:seed` — load institutions/topics/demo users/arXiv fixtures
 - `pnpm api:openapi` / `pnpm api-client:generate` — wired once `apps/api` + `packages/api-client`
   land (M2)
 
 ## Status
 
-P0 foundation in progress. See `docs/CONTEXT.md` section 16 for the phase roadmap.
+P0 foundation + data layer done (M0-M1). See `docs/CONTEXT.md` section 16 for the phase roadmap.
