@@ -1,0 +1,14 @@
+{
+  "identities": [
+    {
+      "name": "pi-dev",
+      "credentials": [
+        {
+          "accessKey": "pi_dev_access_key",
+          "secretKey": "pi_dev_secret_key_change_me"
+        }
+      ],
+      "actions": ["Admin", "Read", "Write", "List", "Tagging"]
+    }
+  ]
+}
