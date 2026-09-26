@@ -1,6 +1,7 @@
 import { writeFileSync } from "node:fs";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { brand } from "@repo/config/brand";
+import type { ObjectStore } from "@repo/reader";
 import {
   createArxivConnector,
   createCrossrefConnector,
@@ -10,6 +11,7 @@ import type { Mailer } from "./mailer.js";
 import { validationHook } from "./middleware/error-handler.js";
 import { healthRoute } from "./routes/health.js";
 import { buildMeRoutes } from "./routes/me.js";
+import { buildReaderRoutes } from "./routes/reader.js";
 import { versionRoute } from "./routes/version.js";
 import { buildWorksRoutes } from "./routes/works.js";
 import type { AppEnv } from "./types.js";
@@ -23,6 +25,7 @@ import type { AppEnv } from "./types.js";
 // metadata to build the doc, it doesn't invoke the handler.
 function buildSpecOnlyApp() {
   const noopMailer: Mailer = { send: async () => {} };
+  const noopObjectStore: ObjectStore = { put: async () => {}, get: async () => null };
   const specConnectors = {
     arxiv: createArxivConnector({ contactEmail: "spec@example.com", productName: brand.shortName }),
     openalex: createOpenAlexConnector({
@@ -40,6 +43,7 @@ function buildSpecOnlyApp() {
   v1.openapi(versionRoute, (c) => c.json({ name: brand.shortName, version: "0.0.0" }, 200));
   v1.route("/me", buildMeRoutes(noopMailer));
   v1.route("/works", buildWorksRoutes(specConnectors, 10_000));
+  v1.route("/works", buildReaderRoutes(noopObjectStore));
 
   const app = new OpenAPIHono<AppEnv>();
   app.route("/v1", v1);

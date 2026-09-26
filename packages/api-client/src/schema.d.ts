@@ -403,6 +403,76 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/works/{workId}/reader": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Fetch the sanitized reader document for a work's latest version */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    workId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description The reader document is ready */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @enum {string} */
+                            status: "ready" | "pending";
+                            bodyHtml?: string;
+                            outline?: unknown[];
+                            figures?: unknown[];
+                            references?: unknown[];
+                        };
+                    };
+                };
+                /** @description The reader document is still being built — retry shortly */
+                202: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @enum {string} */
+                            status: "ready" | "pending";
+                            bodyHtml?: string;
+                            outline?: unknown[];
+                            figures?: unknown[];
+                            references?: unknown[];
+                        };
+                    };
+                };
+                /** @description The work has no version this pipeline can build a reader document for */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {

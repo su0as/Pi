@@ -7,6 +7,8 @@ export const QUEUE_NAMES = {
   arxivHarvestDeadLetter: "arxiv.harvest.dlq",
   workEnrich: "work.enrich",
   workEnrichDeadLetter: "work.enrich.dlq",
+  readerBuild: "reader.build",
+  readerBuildDeadLetter: "reader.build.dlq",
 } as const;
 
 // docs/CONTEXT.md section 9.3 — "retries, dead-letter record." Two retries with exponential

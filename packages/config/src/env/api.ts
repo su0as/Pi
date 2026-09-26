@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { brand } from "../brand.js";
+import { objectStorageEnvShape } from "./object-storage.js";
 
 /**
  * Env schema for apps/api. Grows as later milestones add object storage, etc. — extend this
@@ -58,6 +59,9 @@ const apiEnvSchema = z.object({
   // "resolves ... or fetches+ingests synchronously with a timeout" — how long `GET
   // /v1/works/resolve` waits before returning 202 and letting ingestion finish in the background.
   WORK_RESOLVE_TIMEOUT_MS: z.coerce.number().int().positive().default(10_000),
+
+  // --- M5: reader pipeline (docs/CONTEXT.md section 10) ---
+  ...objectStorageEnvShape,
 });
 
 export type ApiEnv = z.infer<typeof apiEnvSchema>;

@@ -35,6 +35,12 @@ function testEnv(): WorkerEnv {
     HARVEST_CRON: "0 3 * * *",
     HARVEST_CRON_TZ: "UTC",
     HARVEST_BULK_WINDOW_MONTHS: 6,
+    OBJECT_STORAGE_BUCKET: "pi-dev",
+    OBJECT_STORAGE_REGION: "us-east-1",
+    OBJECT_STORAGE_ENDPOINT: "http://localhost:8333",
+    OBJECT_STORAGE_ACCESS_KEY_ID: "pi_dev_access_key",
+    OBJECT_STORAGE_SECRET_ACCESS_KEY: "pi_dev_secret_key_change_me",
+    READER_PIPELINE_VERSION: 1,
   };
 }
 

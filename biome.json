@@ -16,7 +16,8 @@
       "!**/node_modules",
       "!**/.turbo",
       "!packages/db/migrations",
-      "!packages/api-client/src/schema.d.ts"
+      "!packages/api-client/src/schema.d.ts",
+      "!**/fixtures"
     ]
   },
   "formatter": {

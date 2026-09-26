@@ -2,6 +2,10 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "types": ["node"],
+    // @repo/reader (a direct dependency, for the reader route's ObjectStore/ReaderDocument types)
+    // uses linkedom for server-side HTML parsing, which types its DOM-shaped API against the
+    // ambient DOM lib — see packages/reader/tsconfig.json's matching note.
+    "lib": ["ES2022", "DOM"],
     "noEmit": true
   },
   "include": ["src"]

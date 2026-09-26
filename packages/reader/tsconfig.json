@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node"],
+    // linkedom implements the standard DOM interfaces (Document/Element/...) for server-side HTML
+    // parsing — the DOM lib is needed for those types to typecheck, even though this package
+    // never runs in a browser.
+    "lib": ["ES2022", "DOM"],
+    "noEmit": true
+  },
+  "include": ["src"]
+}

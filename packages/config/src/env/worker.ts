@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { brand } from "../brand.js";
+import { objectStorageEnvShape } from "./object-storage.js";
 
 // docs/CONTEXT.md section 9.2's seed categories: "cs.AI, cs.LG, cs.CV, cs.CL, cs.RO, cs.HC,
 // eess.SY, eess.SP, eess.IV, stat.ML, q-bio.*" — the same leaf codes packages/db's seed script
@@ -31,6 +32,12 @@ const workerEnvSchema = z.object({
   // run after that resumes from `ingestion_checkpoints`, not this window, so it only matters once
   // per fresh install.
   HARVEST_BULK_WINDOW_MONTHS: z.coerce.number().int().positive().default(6),
+
+  // --- M5: reader pipeline (docs/CONTEXT.md section 10) ---
+  ...objectStorageEnvShape,
+  // pipeline_version — bump this whenever normalize.ts's output shape changes meaningfully, so
+  // existing reader_documents rows are known-stale rather than silently served as current.
+  READER_PIPELINE_VERSION: z.coerce.number().int().positive().default(1),
 });
 
 export type WorkerEnv = z.infer<typeof workerEnvSchema>;

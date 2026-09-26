@@ -21,6 +21,7 @@ COPY apps/web/package.json apps/web/package.json
 COPY packages/config/package.json packages/config/package.json
 COPY packages/db/package.json packages/db/package.json
 COPY packages/core/package.json packages/core/package.json
+COPY packages/reader/package.json packages/reader/package.json
 COPY packages/sources/package.json packages/sources/package.json
 COPY packages/api-client/package.json packages/api-client/package.json
 RUN pnpm install --frozen-lockfile
@@ -31,6 +32,7 @@ COPY apps/worker apps/worker
 COPY packages/config packages/config
 COPY packages/db packages/db
 COPY packages/core packages/core
+COPY packages/reader packages/reader
 COPY packages/sources packages/sources
 
 RUN addgroup -S app && adduser -S app -G app

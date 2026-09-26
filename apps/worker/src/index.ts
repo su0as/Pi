@@ -3,6 +3,7 @@ import pino from "pino";
 import { buildSourceConnectors } from "./connectors.js";
 import { createWorkerDb } from "./db.js";
 import { registerArxivHarvestJob } from "./jobs/arxiv-harvest.js";
+import { registerReaderBuildJob } from "./jobs/reader-build.js";
 import { registerWorkEnrichJob } from "./jobs/work-enrich.js";
 import { createBoss, startBoss } from "./queue.js";
 
@@ -19,6 +20,7 @@ async function main() {
   await startBoss(boss, logger);
   await registerArxivHarvestJob(boss, db, connectors, env, logger);
   await registerWorkEnrichJob(boss, db, env, logger);
+  await registerReaderBuildJob(boss, db, env, logger);
 
   logger.info(
     {
@@ -26,7 +28,7 @@ async function main() {
       harvestTz: env.HARVEST_CRON_TZ,
       categories: env.HARVEST_CATEGORIES,
     },
-    "@repo/worker booted: arxiv.harvest and work.enrich registered",
+    "@repo/worker booted: arxiv.harvest, work.enrich, and reader.build registered",
   );
 
   for (const signal of ["SIGINT", "SIGTERM"] as const) {
