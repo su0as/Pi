@@ -43,7 +43,8 @@ packages/
   core/       generateId, arXiv/DOI/PMID identifier parsing, zod schemas, permission skeletons
   api-client/ typed client generated from apps/api's OpenAPI spec
   sources/    arXiv/OpenAlex/Crossref connectors, idempotent work upsert (packages/sources)
-  (reader, design-tokens, emails — added as later milestones land)
+  reader/     arXiv HTML sanitizer + Reader Document normalizer, S3-compatible ObjectStore
+  (design-tokens, emails — added as later milestones land)
 docs/
   CONTEXT.md  product + engineering source of truth
   adr/        Architecture Decision Records
@@ -52,7 +53,8 @@ docs/
 ## Commands
 
 - `pnpm i` — install
-- `docker compose up -d` — local Postgres (pgvector, pg_trgm, unaccent), Mailpit, MinIO
+- `docker compose up -d` — local Postgres (pgvector, pg_trgm, unaccent), Mailpit, SeaweedFS
+  (S3-compatible object storage — see `docs/adr/0004-local-object-storage.md`)
 - `pnpm dev` — run web + api + worker
 - `pnpm test`, `pnpm typecheck`, `pnpm lint`, `pnpm build`
 - `pnpm db:migrate` — apply migrations; `pnpm db:generate` — generate a migration from schema
@@ -62,6 +64,9 @@ docs/
 
 ## Status
 
-M0-M4 done: repo foundation, data layer, API skeleton + typed client, auth/identity, and
-ingestion (arXiv/OpenAlex/Crossref connectors, `GET /v1/works/resolve`, `apps/worker`'s
-`arxiv.harvest` cron + `work.enrich` job). See `docs/CONTEXT.md` section 16 for the phase roadmap.
+M0-M5 done: repo foundation, data layer, API skeleton + typed client, auth/identity, ingestion
+(arXiv/OpenAlex/Crossref connectors, `GET /v1/works/resolve`, `apps/worker`'s `arxiv.harvest` cron
++ `work.enrich` job), and the reader pipeline (sanitized + normalized arXiv HTML, built lazily by
+`apps/worker`'s `reader.build` job, served from `GET /v1/works/:id/reader`). See
+`docs/CONTEXT.md` section 16 for the phase roadmap. Known gap: no PDF-fallback path yet for
+non-arXiv-HTML versions (CONTEXT.md's own explicit permission to defer).
