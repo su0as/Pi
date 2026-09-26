@@ -21,6 +21,15 @@ minimumReleaseAgeExclude:
   - '@scalar/hono-api-reference@0.12.6'
   - '@scalar/schemas@0.12.1'
   - '@scalar/types@0.22.1'
+  - '@better-auth/core@1.7.6'
+  - '@better-auth/drizzle-adapter@1.7.6'
+  - '@better-auth/kysely-adapter@1.7.6'
+  - '@better-auth/memory-adapter@1.7.6'
+  - '@better-auth/mongo-adapter@1.7.6'
+  - '@better-auth/prisma-adapter@1.7.6'
+  - '@better-auth/telemetry@1.7.6'
+  - better-auth@1.7.6
+  - resend@6.29.0
 
 onlyBuiltDependencies:
   - "@biomejs/biome"

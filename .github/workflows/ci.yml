@@ -27,10 +27,27 @@ jobs:
           --health-interval 5s
           --health-timeout 5s
           --health-retries 10
+      # apps/api's auth tests send real email through this (docker-compose.yml's local
+      # equivalent) and verify delivery via Mailpit's own HTTP API — not a live SMTP relay, no
+      # secret needed.
+      mailpit:
+        image: axllent/mailpit:latest
+        ports:
+          - 1025:1025
+          - 8025:8025
+        options: >-
+          --health-cmd "wget -q -O - http://localhost:8025/api/v1/info || exit 1"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
 
     env:
       DATABASE_URL: postgres://pi:pi_dev_password@localhost:5432/pi_dev
       NODE_ENV: test
+      # Not a real secret — CI never talks to a real OAuth provider or signs anything anyone
+      # relies on; this only needs to satisfy loadApiEnv's schema and better-auth's own
+      # minimum-length check.
+      BETTER_AUTH_SECRET: ci-test-secret-00000000000000000000000000000000
 
     steps:
       - uses: actions/checkout@v4

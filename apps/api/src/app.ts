@@ -6,12 +6,16 @@ import { cors } from "hono/cors";
 import { requestId } from "hono/request-id";
 import { secureHeaders } from "hono/secure-headers";
 import type { Logger } from "pino";
+import { buildAuth } from "./auth.js";
 import type { Db } from "./db.js";
+import type { Mailer } from "./mailer.js";
 import { notFound, onError, validationHook } from "./middleware/error-handler.js";
 import { idempotency } from "./middleware/idempotency.js";
 import { requestLogger } from "./middleware/logger.js";
 import { createPostgresRateLimitStore, rateLimit } from "./middleware/rate-limit.js";
+import { sessionContext } from "./middleware/session-context.js";
 import { healthRoute } from "./routes/health.js";
+import { buildMeRoutes } from "./routes/me.js";
 import { versionRoute } from "./routes/version.js";
 import type { AppEnv } from "./types.js";
 
@@ -19,10 +23,12 @@ export interface BuildAppOptions {
   env: ApiEnv;
   db: Db;
   logger: Logger;
+  mailer: Mailer;
 }
 
-export function buildApp({ env, db, logger }: BuildAppOptions) {
+export function buildApp({ env, db, logger, mailer }: BuildAppOptions) {
   const app = new OpenAPIHono<AppEnv>({ defaultHook: validationHook });
+  const auth = buildAuth(db, env, mailer);
 
   app.use(requestId());
   app.use(requestLogger(logger));
@@ -30,6 +36,7 @@ export function buildApp({ env, db, logger }: BuildAppOptions) {
     c.set("db", db);
     return next();
   });
+  app.use(sessionContext(auth));
   app.use(
     cors({
       origin: env.CORS_ALLOWED_ORIGINS,
@@ -44,6 +51,10 @@ export function buildApp({ env, db, logger }: BuildAppOptions) {
 
   app.onError(onError);
   app.notFound(notFound);
+
+  // better-auth owns everything under /v1/auth/* — mounted before the /v1 OpenAPI sub-app so
+  // its routes aren't shadowed by the notFound handler.
+  app.on(["GET", "POST"], "/v1/auth/*", (c) => auth.handler(c.req.raw));
 
   const v1 = new OpenAPIHono<AppEnv>({ defaultHook: validationHook });
   v1.openapi(healthRoute, async (c) => {
@@ -62,6 +73,8 @@ export function buildApp({ env, db, logger }: BuildAppOptions) {
       200,
     );
   });
+
+  v1.route("/me", buildMeRoutes(mailer));
 
   app.route("/v1", v1);
 

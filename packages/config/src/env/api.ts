@@ -1,9 +1,9 @@
 import { z } from "zod";
+import { brand } from "../brand.js";
 
 /**
- * Env schema for apps/api. Grows as later milestones add auth, object storage,
- * email, etc. — extend this schema (and .env.example) rather than reading
- * process.env directly anywhere else in apps/api.
+ * Env schema for apps/api. Grows as later milestones add object storage, etc. — extend this
+ * schema (and .env.example) rather than reading process.env directly anywhere else in apps/api.
  */
 const apiEnvSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
@@ -29,6 +29,26 @@ const apiEnvSchema = z.object({
     .int()
     .positive()
     .default(24 * 60 * 60 * 1000),
+
+  // --- M3: auth (docs/CONTEXT.md section 12.3 — self-hosted better-auth, no passwords) ---
+  BETTER_AUTH_SECRET: z.string().min(16),
+  BETTER_AUTH_URL: z.url().default("http://localhost:3001"),
+  WEB_URL: z.url().default("http://localhost:3000"),
+  // Google/Apple are optional at boot — better-auth only registers a provider when both of its
+  // credentials are present, so local dev works without either (email OTP still does). Real
+  // credentials are a deploy-time secret, not something this repo can supply.
+  GOOGLE_CLIENT_ID: z.string().optional(),
+  GOOGLE_CLIENT_SECRET: z.string().optional(),
+  APPLE_CLIENT_ID: z.string().optional(),
+  APPLE_CLIENT_SECRET: z.string().optional(),
+  APPLE_APP_BUNDLE_IDENTIFIER: z.string().optional(),
+
+  // --- M3: email (docs/CONTEXT.md section 12.3 — Resend + React Email, Mailpit locally) ---
+  EMAIL_FROM: z.email().default(`noreply@${brand.domain}`),
+  // Only used when RESEND_API_KEY is unset — Mailpit locally, any real SMTP relay otherwise.
+  SMTP_HOST: z.string().default("localhost"),
+  SMTP_PORT: z.coerce.number().int().positive().default(1025),
+  RESEND_API_KEY: z.string().optional(),
 });
 
 export type ApiEnv = z.infer<typeof apiEnvSchema>;

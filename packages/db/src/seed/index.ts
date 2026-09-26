@@ -102,10 +102,19 @@ async function seedDemoUsers(db: Db, institutionIdByRorId: Map<string, string>):
   for (const fixture of demoUserFixtures) {
     const userRows = await db
       .insert(users)
-      .values({ id: generateId(), handle: fixture.handle, displayName: fixture.displayName })
+      .values({
+        id: generateId(),
+        handle: fixture.handle,
+        displayName: fixture.displayName,
+        email: fixture.email,
+        // Seed users are pre-verified — there's no inbox behind these addresses to click a link
+        // in, and CONTEXT.md's affiliation flow (a *separate* verification from login) is what
+        // these fixtures exist to exercise, not the login email-OTP flow itself.
+        emailVerified: true,
+      })
       .onConflictDoUpdate({
         target: users.handle,
-        set: { displayName: fixture.displayName },
+        set: { displayName: fixture.displayName, email: fixture.email },
       })
       .returning({ id: users.id });
     const userRow = firstOrThrow(userRows, "user upsert");

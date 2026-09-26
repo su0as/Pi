@@ -3,13 +3,15 @@ import pino from "pino";
 import { afterAll, describe, expect, it } from "vitest";
 import { buildApp } from "./app.js";
 import { createApiDb } from "./db.js";
+import { createMailer } from "./mailer.js";
 import { json } from "./test-utils.js";
 
 describe("app", () => {
   const env = loadApiEnv();
   const db = createApiDb(env);
   const logger = pino({ enabled: false });
-  const app = buildApp({ env, db, logger });
+  const mailer = createMailer(env);
+  const app = buildApp({ env, db, logger, mailer });
 
   afterAll(async () => {
     await db.$client.end();
