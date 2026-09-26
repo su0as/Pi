@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1
 #
-# Build from the monorepo root: docker build -f apps/api/Dockerfile .
+# Build from the monorepo root: docker build -f apps/worker/Dockerfile .
 #
-# No `tsc`-compile stage: apps/api runs its TypeScript source directly via tsx, same as
+# No `tsc`-compile stage: apps/worker runs its TypeScript source directly via tsx, same as
 # `pnpm dev` minus --watch. See docs/adr/0006-run-typescript-source-in-production.md for why —
-# short version: packages/db and packages/core ship as raw .ts on purpose (ADR-0001), so a
-# compiled apps/api/dist/ would still import uncompiled .ts from its workspace dependencies, and
-# plain `node` can't resolve those; tsx can.
+# short version: packages/db, packages/core, and packages/sources ship as raw .ts on purpose
+# (ADR-0001), so a compiled apps/worker/dist/ would still import uncompiled .ts from its workspace
+# dependencies, and plain `node` can't resolve those; tsx can.
 
 FROM node:24-alpine AS base
 RUN corepack enable
@@ -27,7 +27,7 @@ RUN pnpm install --frozen-lockfile
 
 # --- runtime: only the source this app actually needs at runtime ---
 FROM deps AS runtime
-COPY apps/api apps/api
+COPY apps/worker apps/worker
 COPY packages/config packages/config
 COPY packages/db packages/db
 COPY packages/core packages/core
@@ -38,7 +38,6 @@ RUN chown -R app:app /repo
 USER app
 
 ENV NODE_ENV=production
-WORKDIR /repo/apps/api
-EXPOSE 3001
+WORKDIR /repo/apps/worker
 
 CMD ["node_modules/.bin/tsx", "--env-file-if-exists=.env", "src/index.ts"]

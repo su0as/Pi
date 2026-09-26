@@ -1,0 +1,477 @@
+{
+  "id": "https://openalex.org/W2998766662",
+  "doi": "https://doi.org/10.7554/elife.52157",
+  "title": "Open exploration",
+  "display_name": "Open exploration",
+  "publication_year": 2020,
+  "publication_date": "2020-01-09",
+  "ids": {
+    "openalex": "https://openalex.org/W2998766662",
+    "doi": "https://doi.org/10.7554/elife.52157",
+    "mag": "2998766662",
+    "pmid": "https://pubmed.ncbi.nlm.nih.gov/31916934"
+  },
+  "language": "en",
+  "primary_location": {
+    "id": "doi:10.7554/elife.52157",
+    "is_oa": true,
+    "landing_page_url": "https://doi.org/10.7554/elife.52157",
+    "pdf_url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNTIxNTcvZWxpZmUtNTIxNTctdjIucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzUyMTU3/elife-52157-v2.pdf?_hash=PyXam2BaPmhpB83fpCkmy0t%2FsbkkpcoKH%2F419dalLh0%3D",
+    "source": {
+      "id": "https://openalex.org/S1336409049",
+      "display_name": "eLife",
+      "issn_l": "2050-084X",
+      "issn": ["2050-084X"],
+      "is_oa": true,
+      "is_in_doaj": true,
+      "is_core": true,
+      "host_organization": "https://openalex.org/P4310311710",
+      "host_organization_name": "eLife Sciences Publications Ltd",
+      "host_organization_lineage": ["https://openalex.org/P4310311710"],
+      "host_organization_lineage_names": ["eLife Sciences Publications Ltd"],
+      "type": "journal"
+    },
+    "license": "cc-by",
+    "license_id": "https://openalex.org/licenses/cc-by",
+    "version": "publishedVersion",
+    "is_accepted": true,
+    "is_published": true,
+    "raw_source_name": "eLife",
+    "raw_type": "journal-article"
+  },
+  "type": "article",
+  "indexed_in": ["crossref", "doaj", "pubmed"],
+  "open_access": {
+    "is_oa": true,
+    "oa_status": "gold",
+    "oa_url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNTIxNTcvZWxpZmUtNTIxNTctdjIucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzUyMTU3/elife-52157-v2.pdf?_hash=PyXam2BaPmhpB83fpCkmy0t%2FsbkkpcoKH%2F419dalLh0%3D",
+    "any_repository_has_fulltext": true
+  },
+  "authorships": [
+    {
+      "author_position": "first",
+      "author": {
+        "id": "https://openalex.org/A5065788589",
+        "display_name": "William Hedley Thompson",
+        "orcid": "https://orcid.org/0000-0002-0533-6035"
+      },
+      "institutions": [
+        {
+          "id": "https://openalex.org/I28166907",
+          "display_name": "Karolinska Institutet",
+          "ror": "https://ror.org/056d84691",
+          "country_code": "SE",
+          "type": "education",
+          "lineage": ["https://openalex.org/I28166907"]
+        },
+        {
+          "id": "https://openalex.org/I97018004",
+          "display_name": "Stanford University",
+          "ror": "https://ror.org/00f54p054",
+          "country_code": "US",
+          "type": "education",
+          "lineage": ["https://openalex.org/I97018004"]
+        }
+      ],
+      "countries": ["SE", "US"],
+      "is_corresponding": false,
+      "raw_author_name": "William Hedley Thompson",
+      "raw_affiliation_strings": [
+        "Department of Clinical Neuroscience, Karolinska Institute, Stockholm, Sweden",
+        "Department of Psychology, Stanford University, Stanford, United States",
+        "Department of Clinical Neuroscience, Karolinska Institute, Stockholm, Sweden; Department of Psychology, Stanford University, Stanford, United States"
+      ],
+      "raw_orcid": "https://orcid.org/0000-0002-0533-6035",
+      "affiliations": [
+        {
+          "raw_affiliation_string": "Department of Clinical Neuroscience, Karolinska Institute, Stockholm, Sweden",
+          "institution_ids": ["https://openalex.org/I28166907"]
+        },
+        {
+          "raw_affiliation_string": "Department of Psychology, Stanford University, Stanford, United States",
+          "institution_ids": ["https://openalex.org/I97018004"]
+        },
+        {
+          "raw_affiliation_string": "Department of Clinical Neuroscience, Karolinska Institute, Stockholm, Sweden; Department of Psychology, Stanford University, Stanford, United States",
+          "institution_ids": ["https://openalex.org/I28166907", "https://openalex.org/I97018004"]
+        }
+      ]
+    },
+    {
+      "author_position": "middle",
+      "author": {
+        "id": "https://openalex.org/A5042559808",
+        "display_name": "Jessey Wright",
+        "orcid": "https://orcid.org/0000-0001-5003-0572"
+      },
+      "institutions": [
+        {
+          "id": "https://openalex.org/I97018004",
+          "display_name": "Stanford University",
+          "ror": "https://ror.org/00f54p054",
+          "country_code": "US",
+          "type": "education",
+          "lineage": ["https://openalex.org/I97018004"]
+        }
+      ],
+      "countries": ["US"],
+      "is_corresponding": false,
+      "raw_author_name": "Jessey Wright",
+      "raw_affiliation_strings": [
+        "Department of Psychology, Stanford University, Stanford, United States"
+      ],
+      "raw_orcid": null,
+      "affiliations": [
+        {
+          "raw_affiliation_string": "Department of Psychology, Stanford University, Stanford, United States",
+          "institution_ids": ["https://openalex.org/I97018004"]
+        }
+      ]
+    },
+    {
+      "author_position": "last",
+      "author": {
+        "id": "https://openalex.org/A5029322906",
+        "display_name": "Patrick G. Bissett",
+        "orcid": "https://orcid.org/0000-0003-0854-9404"
+      },
+      "institutions": [
+        {
+          "id": "https://openalex.org/I97018004",
+          "display_name": "Stanford University",
+          "ror": "https://ror.org/00f54p054",
+          "country_code": "US",
+          "type": "education",
+          "lineage": ["https://openalex.org/I97018004"]
+        }
+      ],
+      "countries": ["US"],
+      "is_corresponding": false,
+      "raw_author_name": "Patrick G Bissett",
+      "raw_affiliation_strings": [
+        "Department of Psychology, Stanford University, Stanford, United States"
+      ],
+      "raw_orcid": null,
+      "affiliations": [
+        {
+          "raw_affiliation_string": "Department of Psychology, Stanford University, Stanford, United States",
+          "institution_ids": ["https://openalex.org/I97018004"]
+        }
+      ]
+    }
+  ],
+  "institutions": [],
+  "countries_distinct_count": 2,
+  "institutions_distinct_count": 2,
+  "corresponding_author_ids": [],
+  "corresponding_institution_ids": [],
+  "apc_list": {
+    "value": 3000,
+    "currency": "USD",
+    "value_usd": 2500
+  },
+  "apc_paid": {
+    "value": 3000,
+    "currency": "USD",
+    "value_usd": 2500
+  },
+  "fwci": 2.9684,
+  "has_fulltext": true,
+  "cited_by_count": 23,
+  "citation_normalized_percentile": {
+    "value": 0.92174814,
+    "is_in_top_1_percent": false,
+    "is_in_top_10_percent": true
+  },
+  "biblio": {
+    "volume": "9",
+    "issue": null,
+    "first_page": null,
+    "last_page": null
+  },
+  "is_retracted": false,
+  "is_paratext": false,
+  "is_xpac": false,
+  "primary_topic": {
+    "id": "https://openalex.org/T10206",
+    "display_name": "Meta-analysis and systematic reviews",
+    "score": 0.9958999752998352,
+    "subfield": {
+      "id": "https://openalex.org/subfields/1804",
+      "display_name": "Statistics, Probability and Uncertainty"
+    },
+    "field": {
+      "id": "https://openalex.org/fields/18",
+      "display_name": "Decision Sciences"
+    },
+    "domain": {
+      "id": "https://openalex.org/domains/2",
+      "display_name": "Social Sciences"
+    }
+  },
+  "topics": [
+    {
+      "id": "https://openalex.org/T10206",
+      "display_name": "Meta-analysis and systematic reviews",
+      "score": 0.9958999752998352,
+      "subfield": {
+        "id": "https://openalex.org/subfields/1804",
+        "display_name": "Statistics, Probability and Uncertainty"
+      },
+      "field": {
+        "id": "https://openalex.org/fields/18",
+        "display_name": "Decision Sciences"
+      },
+      "domain": {
+        "id": "https://openalex.org/domains/2",
+        "display_name": "Social Sciences"
+      }
+    },
+    {
+      "id": "https://openalex.org/T11937",
+      "display_name": "Research Data Management Practices",
+      "score": 0.9811999797821045,
+      "subfield": {
+        "id": "https://openalex.org/subfields/1710",
+        "display_name": "Information Systems"
+      },
+      "field": {
+        "id": "https://openalex.org/fields/17",
+        "display_name": "Computer Science"
+      },
+      "domain": {
+        "id": "https://openalex.org/domains/3",
+        "display_name": "Physical Sciences"
+      }
+    },
+    {
+      "id": "https://openalex.org/T11986",
+      "display_name": "Scientific Computing and Data Management",
+      "score": 0.9750000238418579,
+      "subfield": {
+        "id": "https://openalex.org/subfields/1802",
+        "display_name": "Information Systems and Management"
+      },
+      "field": {
+        "id": "https://openalex.org/fields/18",
+        "display_name": "Decision Sciences"
+      },
+      "domain": {
+        "id": "https://openalex.org/domains/2",
+        "display_name": "Social Sciences"
+      }
+    }
+  ],
+  "keywords": [
+    {
+      "id": "https://openalex.org/keywords/open-science",
+      "display_name": "Open science",
+      "score": 0.8286832571029663
+    },
+    {
+      "id": "https://openalex.org/keywords/open-data",
+      "display_name": "Open data",
+      "score": 0.5319331884384155
+    },
+    {
+      "id": "https://openalex.org/keywords/focus",
+      "display_name": "Focus (optics)",
+      "score": 0.520885705947876
+    },
+    {
+      "id": "https://openalex.org/keywords/open-research",
+      "display_name": "Open research",
+      "score": 0.4936610162258148
+    },
+    {
+      "id": "https://openalex.org/keywords/data-science",
+      "display_name": "Data science",
+      "score": 0.4694366455078125
+    },
+    {
+      "id": "https://openalex.org/keywords/computer-science",
+      "display_name": "Computer science",
+      "score": 0.38435009121894836
+    },
+    {
+      "id": "https://openalex.org/keywords/engineering-ethics",
+      "display_name": "Engineering ethics",
+      "score": 0.37126752734184265
+    },
+    {
+      "id": "https://openalex.org/keywords/political-science",
+      "display_name": "Political science",
+      "score": 0.35754474997520447
+    },
+    {
+      "id": "https://openalex.org/keywords/sociology",
+      "display_name": "Sociology",
+      "score": 0.3447193503379822
+    },
+    {
+      "id": "https://openalex.org/keywords/world-wide-web",
+      "display_name": "World Wide Web",
+      "score": 0.1669958233833313
+    },
+    {
+      "id": "https://openalex.org/keywords/engineering",
+      "display_name": "Engineering",
+      "score": 0.15129956603050232
+    },
+    {
+      "id": "https://openalex.org/keywords/mathematics",
+      "display_name": "Mathematics",
+      "score": 0.08059293031692505
+    }
+  ],
+  "locations_count": 5,
+  "best_oa_location": {
+    "id": "doi:10.7554/elife.52157",
+    "is_oa": true,
+    "landing_page_url": "https://doi.org/10.7554/elife.52157",
+    "pdf_url": "https://elifesciences.org/download/aHR0cHM6Ly9jZG4uZWxpZmVzY2llbmNlcy5vcmcvYXJ0aWNsZXMvNTIxNTcvZWxpZmUtNTIxNTctdjIucGRmP2Nhbm9uaWNhbFVyaT1odHRwczovL2VsaWZlc2NpZW5jZXMub3JnL2FydGljbGVzLzUyMTU3/elife-52157-v2.pdf?_hash=PyXam2BaPmhpB83fpCkmy0t%2FsbkkpcoKH%2F419dalLh0%3D",
+    "source": {
+      "id": "https://openalex.org/S1336409049",
+      "display_name": "eLife",
+      "issn_l": "2050-084X",
+      "issn": ["2050-084X"],
+      "is_oa": true,
+      "is_in_doaj": true,
+      "is_core": true,
+      "host_organization": "https://openalex.org/P4310311710",
+      "host_organization_name": "eLife Sciences Publications Ltd",
+      "host_organization_lineage": ["https://openalex.org/P4310311710"],
+      "host_organization_lineage_names": ["eLife Sciences Publications Ltd"],
+      "type": "journal"
+    },
+    "license": "cc-by",
+    "license_id": "https://openalex.org/licenses/cc-by",
+    "version": "publishedVersion",
+    "is_accepted": true,
+    "is_published": true,
+    "raw_source_name": "eLife",
+    "raw_type": "journal-article"
+  },
+  "x_sdgs": [],
+  "awards": [
+    {
+      "id": "https://openalex.org/G2446583500",
+      "display_name": "Postdoctoral Fellowship: The Changing Interface between Data, Theories and Communities in Neuroimaging Research",
+      "funder_award_id": "1655839",
+      "funder_id": "https://openalex.org/F4320306076",
+      "funder_display_name": "National Science Foundation"
+    },
+    {
+      "id": "https://openalex.org/G2709652706",
+      "display_name": null,
+      "funder_award_id": "UH3 DA041713",
+      "funder_id": "https://openalex.org/F4320337347",
+      "funder_display_name": "National Institute on Drug Abuse"
+    },
+    {
+      "id": "https://openalex.org/G3360707922",
+      "display_name": null,
+      "funder_award_id": "2016.0473",
+      "funder_id": "https://openalex.org/F4320322327",
+      "funder_display_name": "Knut och Alice Wallenbergs Stiftelse"
+    },
+    {
+      "id": "https://openalex.org/G3512793166",
+      "display_name": null,
+      "funder_award_id": "756-2017-0766-SSHRC",
+      "funder_id": "https://openalex.org/F4320334617",
+      "funder_display_name": "Social Sciences and Humanities Research Council of Canada"
+    },
+    {
+      "id": "https://openalex.org/G788245873",
+      "display_name": null,
+      "funder_award_id": "R01MH117772",
+      "funder_id": "https://openalex.org/F4320337346",
+      "funder_display_name": "National Institute of Mental Health"
+    }
+  ],
+  "funders": [
+    {
+      "id": "https://openalex.org/F4320306076",
+      "display_name": "National Science Foundation",
+      "ror": "https://ror.org/021nxhr62"
+    },
+    {
+      "id": "https://openalex.org/F4320322327",
+      "display_name": "Knut och Alice Wallenbergs Stiftelse",
+      "ror": "https://ror.org/004hzzk67"
+    },
+    {
+      "id": "https://openalex.org/F4320334617",
+      "display_name": "Social Sciences and Humanities Research Council of Canada",
+      "ror": "https://ror.org/04j5jqy92"
+    },
+    {
+      "id": "https://openalex.org/F4320337346",
+      "display_name": "National Institute of Mental Health",
+      "ror": "https://ror.org/04xeg9z08"
+    },
+    {
+      "id": "https://openalex.org/F4320337347",
+      "display_name": "National Institute on Drug Abuse",
+      "ror": "https://ror.org/00fq5cm18"
+    }
+  ],
+  "has_content": {
+    "grobid_xml": true,
+    "pdf": true
+  },
+  "content_urls": {
+    "pdf": "https://content.openalex.org/works/W2998766662.pdf",
+    "grobid_xml": "https://content.openalex.org/works/W2998766662.grobid-xml"
+  },
+  "referenced_works_count": 28,
+  "referenced_works": ["https://openalex.org/W1490676200", "https://openalex.org/W1767470961"],
+  "abstract_inverted_index": {
+    "Arguments": [0],
+    "in": [1],
+    "support": [2],
+    "of": [3, 26, 34],
+    "open": [4, 27],
+    "science": [5],
+    "tend": [6],
+    "to": [7, 42],
+    "focus": [8],
+    "on": [9],
+    "confirmatory": [10],
+    "research": [11, 18],
+    "practices.": [12],
+    "Here": [13],
+    "we": [14],
+    "argue": [15],
+    "that": [16],
+    "exploratory": [17],
+    "should": [19],
+    "also": [20],
+    "be": [21],
+    "encouraged": [22],
+    "within": [23],
+    "the": [24, 32],
+    "framework": [25],
+    "science.": [28],
+    "We": [29],
+    "lay": [30],
+    "out": [31],
+    "benefits": [33],
+    "'open": [35],
+    "exploration'": [36],
+    "and": [37],
+    "propose": [38],
+    "two": [39],
+    "complementary": [40],
+    "ways": [41],
+    "implement": [43],
+    "this": [44],
+    "with": [45],
+    "little": [46],
+    "infrastructural": [47],
+    "change.": [48]
+  },
+  "updated_date": "2026-09-09T07:26:56.047234",
+  "created_date": "2020-01-23T00:00:00"
+}

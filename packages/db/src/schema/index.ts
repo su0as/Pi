@@ -1,6 +1,7 @@
 export * from "./api.js";
 export * from "./auth.js";
 export * from "./enums.js";
+export * from "./ingestion.js";
 export * from "./notes.js";
 export * from "./personal.js";
 export * from "./scholarly.js";

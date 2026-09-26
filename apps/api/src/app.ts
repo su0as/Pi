@@ -8,6 +8,7 @@ import { secureHeaders } from "hono/secure-headers";
 import type { Logger } from "pino";
 import { buildAuth } from "./auth.js";
 import type { Db } from "./db.js";
+import { buildSourceConnectors } from "./lib/connectors.js";
 import type { Mailer } from "./mailer.js";
 import { notFound, onError, validationHook } from "./middleware/error-handler.js";
 import { idempotency } from "./middleware/idempotency.js";
@@ -17,6 +18,7 @@ import { sessionContext } from "./middleware/session-context.js";
 import { healthRoute } from "./routes/health.js";
 import { buildMeRoutes } from "./routes/me.js";
 import { versionRoute } from "./routes/version.js";
+import { buildWorksRoutes } from "./routes/works.js";
 import type { AppEnv } from "./types.js";
 
 export interface BuildAppOptions {
@@ -24,9 +26,12 @@ export interface BuildAppOptions {
   db: Db;
   logger: Logger;
   mailer: Mailer;
+  /** Injectable for tests — routes the M4 source connectors' HTTP calls through recorded
+   * fixtures instead of the real arXiv/OpenAlex/Crossref APIs. Defaults to the real `fetch`. */
+  sourceFetchImpl?: typeof fetch;
 }
 
-export function buildApp({ env, db, logger, mailer }: BuildAppOptions) {
+export function buildApp({ env, db, logger, mailer, sourceFetchImpl }: BuildAppOptions) {
   const app = new OpenAPIHono<AppEnv>({ defaultHook: validationHook });
   const auth = buildAuth(db, env, mailer);
 
@@ -75,6 +80,10 @@ export function buildApp({ env, db, logger, mailer }: BuildAppOptions) {
   });
 
   v1.route("/me", buildMeRoutes(mailer));
+  v1.route(
+    "/works",
+    buildWorksRoutes(buildSourceConnectors(env, sourceFetchImpl), env.WORK_RESOLVE_TIMEOUT_MS),
+  );
 
   app.route("/v1", v1);
 

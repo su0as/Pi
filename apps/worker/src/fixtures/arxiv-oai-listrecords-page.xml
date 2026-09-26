@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-09-26T00:20:29Z</responseDate>
+    <request verb="ListRecords" metadataPrefix="arXivRaw" from="2026-09-24" until="2026-09-24" set="cs:cs:RO">http://oaipmh.arxiv.org/oai</request>
+    <ListRecords>
+        <record>
+            <header>
+                <identifier>oai:arXiv.org:2309.10164</identifier>
+                <datestamp>2026-09-24</datestamp>
+                <setSpec>cs:cs:RO</setSpec>
+                <setSpec>cs:cs:AI</setSpec>
+            </header>
+            <metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXivRaw/ https://oaipmh.arxiv.org/OAI/arXivRaw.xsd">
+                    <id>2309.10164</id>
+                    <submitter>Frederic Vatnsdal</submitter>
+                    <version version="v1">
+                        <date>Mon, 18 Sep 2023 21:20:50 GMT</date>
+                        <size>1092kb</size>
+                        <source_type>D</source_type>
+                    </version>
+                    <version version="v2">
+                        <date>Sun, 21 Sep 2025 20:41:13 GMT</date>
+                        <size>5556kb</size>
+                    </version>
+                    <version version="v3">
+                        <date>Wed, 23 Sep 2026 15:02:29 GMT</date>
+                        <size>4182kb</size>
+                    </version>
+                    <title>A Scalable Multi-Robot Framework for Decentralized and Asynchronous Perception-Action-Communication Loops</title>
+                    <authors>Saurav Agarwal, Frederic Vatnsdal, Romina Garcia Camargo, Carlos Nieto-Granda, Vijay Kumar, Alejandro Ribeiro</authors>
+                    <categories>cs.RO cs.AI</categories>
+                    <license>http://creativecommons.org/licenses/by/4.0/</license>
+                    <abstract>We develop a decentralized Perception-Action-Communication (PAC) system for multi-robot teams that enables them to collaborate in large scale, outdoor environments.</abstract>
+                </arXivRaw>
+            </metadata>
+        </record>
+        <record>
+            <header>
+                <identifier>oai:arXiv.org:2402.17937</identifier>
+                <datestamp>2026-09-24</datestamp>
+                <setSpec>cs:cs:RO</setSpec>
+            </header>
+            <metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXivRaw/ https://oaipmh.arxiv.org/OAI/arXivRaw.xsd">
+                    <id>2402.17937</id>
+                    <submitter>Mina Kian</submitter>
+                    <version version="v1">
+                        <date>Tue, 27 Feb 2024 23:30:10 GMT</date>
+                        <size>10536kb</size>
+                        <source_type>D</source_type>
+                    </version>
+                    <version version="v2">
+                        <date>Wed, 23 Sep 2026 01:24:25 GMT</date>
+                        <size>3676kb</size>
+                    </version>
+                    <title>LLM-Powered Socially Assistive Robot-Delivered Cognitive Behavioral Therapy Exercises: an Exploratory Study with University Students</title>
+                    <authors>Mina Kian, Mingyu Zong, Katrin Fischer</authors>
+                    <categories>cs.RO</categories>
+                    <journal-ref>Front. Robot. AI 13 (2026)</journal-ref>
+                    <doi>10.3389/frobt.2026.1802622</doi>
+                    <license>http://creativecommons.org/licenses/by/4.0/</license>
+                    <abstract>Mental health is a significant healthcare challenge, and cognitive behavioral therapy (CBT) is a widely used therapeutic method for treating anxiety and depression.</abstract>
+                </arXivRaw>
+            </metadata>
+        </record>
+        <record>
+            <header>
+                <identifier>oai:arXiv.org:2609.28467</identifier>
+                <datestamp>2026-09-24</datestamp>
+                <setSpec>cs:cs:RO</setSpec>
+                <setSpec>cs:cs:AI</setSpec>
+            </header>
+            <metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://arxiv.org/OAI/arXivRaw/ https://oaipmh.arxiv.org/OAI/arXivRaw.xsd">
+                    <id>2609.28467</id>
+                    <submitter>Zilin Fang</submitter>
+                    <version version="v1">
+                        <date>Wed, 23 Sep 2026 17:55:48 GMT</date>
+                        <size>3455kb</size>
+                    </version>
+                    <title>Where Should I Join? Robot Group Joining via Language-Guided Goal Prediction</title>
+                    <authors>Zilin Fang, Zishuo Wang, Gim Hee Lee, David Hsu</authors>
+                    <categories>cs.RO cs.AI</categories>
+                    <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+                    <abstract>Social navigation typically assumes a specified goal and focuses on reaching it while respecting social conventions.</abstract>
+                </arXivRaw>
+            </metadata>
+        </record>
+    </ListRecords>
+</OAI-PMH>

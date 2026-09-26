@@ -34,14 +34,16 @@ match `docker-compose.yml`.
 apps/
   web/        Next.js (App Router) — UI only, calls the API
   api/        Hono HTTP API
-  worker/     pg-boss job runner (jobs land starting M4)
+  worker/     pg-boss job runner — arxiv.harvest (daily cron) + work.enrich
   mobile/     placeholder — Expo app, P2
   extension/  placeholder — WXT browser extension, P2
 packages/
   config/     brand.ts + zod-validated env loaders, shared to every app
   db/         Drizzle schema, migrations, seed script (packages/db/src/seed)
   core/       generateId, arXiv/DOI/PMID identifier parsing, zod schemas, permission skeletons
-  (api-client, sources, reader, design-tokens, emails — added as later milestones land)
+  api-client/ typed client generated from apps/api's OpenAPI spec
+  sources/    arXiv/OpenAlex/Crossref connectors, idempotent work upsert (packages/sources)
+  (reader, design-tokens, emails — added as later milestones land)
 docs/
   CONTEXT.md  product + engineering source of truth
   adr/        Architecture Decision Records
@@ -55,9 +57,11 @@ docs/
 - `pnpm test`, `pnpm typecheck`, `pnpm lint`, `pnpm build`
 - `pnpm db:migrate` — apply migrations; `pnpm db:generate` — generate a migration from schema
   changes; `pnpm db:seed` — load institutions/topics/demo users/arXiv fixtures
-- `pnpm api:openapi` / `pnpm api-client:generate` — wired once `apps/api` + `packages/api-client`
-  land (M2)
+- `pnpm --filter @repo/api openapi:write` / `pnpm --filter @repo/api-client generate` — regenerate
+  the OpenAPI spec and the typed client after changing an API route
 
 ## Status
 
-P0 foundation + data layer done (M0-M1). See `docs/CONTEXT.md` section 16 for the phase roadmap.
+M0-M4 done: repo foundation, data layer, API skeleton + typed client, auth/identity, and
+ingestion (arXiv/OpenAlex/Crossref connectors, `GET /v1/works/resolve`, `apps/worker`'s
+`arxiv.harvest` cron + `work.enrich` job). See `docs/CONTEXT.md` section 16 for the phase roadmap.

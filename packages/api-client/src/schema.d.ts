@@ -327,6 +327,82 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/works/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Resolve any arXiv ID/URL or DOI to a work, ingesting it on first sight */
+        get: {
+            parameters: {
+                query: {
+                    /** @description An arXiv ID/URL, DOI, or PMID/PubMed URL. */
+                    id: string;
+                };
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Resolved to an existing or newly ingested work */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @enum {string} */
+                            status: "found" | "ingested" | "pending";
+                            /** Format: uuid */
+                            workId?: string;
+                        };
+                    };
+                };
+                /** @description Ingestion is still in progress — retry shortly */
+                202: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @enum {string} */
+                            status: "found" | "ingested" | "pending";
+                            /** Format: uuid */
+                            workId?: string;
+                        };
+                    };
+                };
+                /** @description id isn't a recognizable arXiv ID/URL, DOI, or PMID */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+                /** @description No connector could find a record for this identifier */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Constructed — see arxiv-oai-listrecords-paginated-page1.xml's comment. Final page: empty
+     resumptionToken signals no more data, per the OAI-PMH 2.0 spec. -->
+<OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd">
+    <responseDate>2026-09-26T00:20:31Z</responseDate>
+    <request verb="ListRecords" resumptionToken="test-resumption-token-abc123">http://oaipmh.arxiv.org/oai</request>
+    <ListRecords>
+        <record>
+            <header>
+                <identifier>oai:arXiv.org:2609.28467</identifier>
+                <datestamp>2026-09-24</datestamp>
+                <setSpec>cs:cs:RO</setSpec>
+            </header>
+            <metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+                    <id>2609.28467</id>
+                    <version version="v1">
+                        <date>Wed, 23 Sep 2026 17:55:48 GMT</date>
+                    </version>
+                    <title>Where Should I Join? Robot Group Joining via Language-Guided Goal Prediction</title>
+                    <authors>Zilin Fang, Zishuo Wang</authors>
+                    <categories>cs.RO cs.AI</categories>
+                    <license>http://arxiv.org/licenses/nonexclusive-distrib/1.0/</license>
+                    <abstract>Social navigation typically assumes a specified goal.</abstract>
+                </arXivRaw>
+            </metadata>
+        </record>
+        <resumptionToken cursor="1" completeListSize="2"/>
+    </ListRecords>
+</OAI-PMH>

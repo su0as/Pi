@@ -49,6 +49,15 @@ const apiEnvSchema = z.object({
   SMTP_HOST: z.string().default("localhost"),
   SMTP_PORT: z.coerce.number().int().positive().default(1025),
   RESEND_API_KEY: z.string().optional(),
+
+  // --- M4: ingestion (docs/CONTEXT.md section 9.3/9.4) ---
+  // arXiv's stated politeness requirement is a contact email in the User-Agent; reused as the
+  // `mailto` param for OpenAlex/Crossref's polite pools too, since CONTEXT.md doesn't ask for a
+  // separate one per source and this repo has exactly one such contact.
+  ARXIV_CONTACT_EMAIL: z.string().default(brand.arxivContactEmail),
+  // "resolves ... or fetches+ingests synchronously with a timeout" — how long `GET
+  // /v1/works/resolve` waits before returning 202 and letting ingestion finish in the background.
+  WORK_RESOLVE_TIMEOUT_MS: z.coerce.number().int().positive().default(10_000),
 });
 
 export type ApiEnv = z.infer<typeof apiEnvSchema>;

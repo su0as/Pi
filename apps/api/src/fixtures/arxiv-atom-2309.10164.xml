@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/6S0lluloqHbgv5Cj8YCP7l6LWxo</id>
+  <title>arXiv Query: search_query=&amp;id_list=2309.10164&amp;start=0&amp;max_results=10</title>
+  <updated>2026-09-26T00:47:15Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=10&amp;id_list=2309.10164" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>10</opensearch:itemsPerPage>
+  <opensearch:totalResults>1</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/2309.10164v3</id>
+    <title>A Scalable Multi-Robot Framework for Decentralized and Asynchronous Perception-Action-Communication Loops</title>
+    <updated>2026-09-23T15:02:29Z</updated>
+    <link href="https://arxiv.org/abs/2309.10164v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2309.10164v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>We develop a decentralized Perception-Action-Communication (PAC) system for multi-robot teams that enables them to collaborate in large scale, outdoor environments. Our system natively supports deployments at any scale by leveraging a graph neural network (GNN) to diffuse information hop-by-hop across the fleet's network. This achieves global collaboration from individual robots limited to local sensing and communication. Fully asynchronous, the core modules of PAC: perception, inter-robot communication, message aggregation and action are clocked at different frequencies with information flowing between them through buffers. We implement the PAC system as a series of highly extensible ROS2 nodes to serve as the foundational infrastructure for deployable swarm systems. PAC is validated in the real world with outdoor experiments with up to N=20 quadrotor robots and in simulations based on real-world data with up to N=100. These validations show that our system upholds crucial properties for field-deployable robot collectives: scalability, resiliency and repeatability.</summary>
+    <category term="cs.RO" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cs.AI" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2023-09-18T21:20:50Z</published>
+    <arxiv:primary_category term="cs.RO"/>
+    <author>
+      <name>Saurav Agarwal</name>
+    </author>
+    <author>
+      <name>Frederic Vatnsdal</name>
+    </author>
+    <author>
+      <name>Romina Garcia Camargo</name>
+    </author>
+    <author>
+      <name>Carlos Nieto-Granda</name>
+    </author>
+    <author>
+      <name>Vijay Kumar</name>
+    </author>
+    <author>
+      <name>Alejandro Ribeiro</name>
+    </author>
+  </entry>
+</feed>
