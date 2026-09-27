@@ -1,8 +1,15 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
 import { parseExternalId } from "@repo/core";
-import { workIdentifiers, workRedirects } from "@repo/db/schema";
+import {
+  authorships,
+  persons,
+  workIdentifiers,
+  workRedirects,
+  works,
+  workVersions,
+} from "@repo/db/schema";
 import { upsertNormalizedWork } from "@repo/sources";
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import type { Db } from "../db.js";
 import type { SourceConnectors } from "../lib/connectors.js";
 import { AppError } from "../lib/problem-details.js";
@@ -65,9 +72,56 @@ async function resolveCanonicalWorkId(db: Db, workId: string): Promise<string> {
   return redirect?.canonicalWorkId ?? workId;
 }
 
+const workAuthorSchema = z.object({ name: z.string(), personId: z.string().uuid() });
+const workIdentifierSchema = z.object({
+  scheme: z.string(),
+  valueNormalized: z.string(),
+});
+const workDetailResponseSchema = z.object({
+  id: z.string().uuid(),
+  title: z.string(),
+  abstract: z.string().nullable(),
+  workType: z.string(),
+  publishedAt: z.string().nullable(),
+  authors: z.array(workAuthorSchema),
+  identifiers: z.array(workIdentifierSchema),
+  latestVersion: z
+    .object({
+      versionLabel: z.string(),
+      license: z.string().nullable(),
+      canDisplayFullText: z.boolean(),
+      pdfUrl: z.string().nullable(),
+      htmlUrl: z.string().nullable(),
+      sourceUrl: z.string().nullable(),
+    })
+    .nullable(),
+});
+
+const workDetailRoute = createRoute({
+  method: "get",
+  path: "/{workId}",
+  summary: "Fetch a work's metadata (title, abstract, authors, identifiers, latest version)",
+  request: { params: z.object({ workId: z.string().uuid() }) },
+  responses: {
+    200: {
+      description: "The work",
+      content: { "application/json": { schema: workDetailResponseSchema } },
+    },
+    404: {
+      description: "No work with this id",
+      content: { "application/json": { schema: z.any() } },
+    },
+  },
+});
+
 export function buildWorksRoutes(connectors: SourceConnectors, timeoutMs: number) {
   const worksRouter = new OpenAPIHono<AppEnv>({ defaultHook: validationHook });
 
+  // Registered before workDetailRoute's "/{workId}" — Hono's router matches literal path
+  // segments over dynamic params for the SAME registration, but two separately `.openapi()`-ed
+  // routes on one OpenAPIHono instance are tried in registration order, so "/resolve" must be
+  // registered first or a request for it gets captured as `workId = "resolve"` and 400s on the
+  // uuid validation instead of ever reaching this handler (verified directly, not assumed).
   worksRouter.openapi(resolveRoute, async (c) => {
     const { id } = c.req.valid("query");
     const db = c.get("db");
@@ -144,6 +198,62 @@ export function buildWorksRoutes(connectors: SourceConnectors, timeoutMs: number
     }
 
     return c.json({ status: "ingested" as const, workId: raceResult.workId }, 200);
+  });
+
+  worksRouter.openapi(workDetailRoute, async (c) => {
+    const { workId } = c.req.valid("param");
+    const db = c.get("db");
+
+    const [work] = await db.select().from(works).where(eq(works.id, workId)).limit(1);
+    if (!work) {
+      throw new AppError(404, "work_not_found", "No work with this id.");
+    }
+
+    const authorRows = await db
+      .select({
+        name: authorships.rawName,
+        personId: authorships.personId,
+        position: authorships.position,
+      })
+      .from(authorships)
+      .innerJoin(persons, eq(authorships.personId, persons.id))
+      .where(eq(authorships.workId, workId))
+      .orderBy(authorships.position);
+
+    const identifierRows = await db
+      .select({ scheme: workIdentifiers.scheme, valueNormalized: workIdentifiers.valueNormalized })
+      .from(workIdentifiers)
+      .where(eq(workIdentifiers.workId, workId));
+
+    const [latestVersion] = await db
+      .select()
+      .from(workVersions)
+      .where(eq(workVersions.workId, workId))
+      .orderBy(desc(workVersions.publishedAt))
+      .limit(1);
+
+    return c.json(
+      {
+        id: work.id,
+        title: work.title,
+        abstract: work.abstract,
+        workType: work.workType,
+        publishedAt: work.publishedAt?.toISOString() ?? null,
+        authors: authorRows.map((a) => ({ name: a.name ?? "", personId: a.personId })),
+        identifiers: identifierRows,
+        latestVersion: latestVersion
+          ? {
+              versionLabel: latestVersion.versionLabel,
+              license: latestVersion.license,
+              canDisplayFullText: latestVersion.canDisplayFullText,
+              pdfUrl: latestVersion.pdfUrl,
+              htmlUrl: latestVersion.htmlUrl,
+              sourceUrl: latestVersion.sourceUrl,
+            }
+          : null,
+      },
+      200,
+    );
   });
 
   return worksRouter;

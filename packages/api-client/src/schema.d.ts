@@ -403,6 +403,77 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/works/{workId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Fetch a work's metadata (title, abstract, authors, identifiers, latest version) */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    workId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description The work */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** Format: uuid */
+                            id: string;
+                            title: string;
+                            abstract: string | null;
+                            workType: string;
+                            publishedAt: string | null;
+                            authors: {
+                                name: string;
+                                /** Format: uuid */
+                                personId: string;
+                            }[];
+                            identifiers: {
+                                scheme: string;
+                                valueNormalized: string;
+                            }[];
+                            latestVersion: {
+                                versionLabel: string;
+                                license: string | null;
+                                canDisplayFullText: boolean;
+                                pdfUrl: string | null;
+                                htmlUrl: string | null;
+                                sourceUrl: string | null;
+                            } | null;
+                        };
+                    };
+                };
+                /** @description No work with this id */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/works/{workId}/reader": {
         parameters: {
             query?: never;

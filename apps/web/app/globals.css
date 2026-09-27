@@ -1,8 +1,53 @@
-:root {
-  color-scheme: light dark;
-}
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@repo/design-tokens/tokens.css";
 
-body {
-  margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+/*
+ * Manual reader-content typography, standing in for the @tailwindcss/typography plugin — that
+ * plugin's `@plugin "@tailwindcss/typography"` directive hits a real pnpm + Turbopack module
+ * resolution failure ("Can't resolve '@tailwindcss/typography'") even though the package is
+ * correctly installed and resolvable via plain Node `require.resolve()` from the same directory
+ * — verified directly, not a config typo. Styles packages/reader's sanitized output (plain
+ * semantic tags; LaTeXML's own `ltx_*` classes carry no styling here since their stylesheet is
+ * intentionally never loaded — see packages/reader/src/sanitize.ts).
+ */
+.reader-content h1,
+.reader-content h2,
+.reader-content h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+.reader-content p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+.reader-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.reader-content figure {
+  margin: 2rem 0;
+}
+.reader-content img {
+  max-width: 100%;
+  height: auto;
+}
+.reader-content figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+}
+.reader-content table {
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.reader-content td,
+.reader-content th {
+  border: 1px solid var(--border);
+  padding: 0.5rem;
 }

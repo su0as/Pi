@@ -1,0 +1,28 @@
+{
+  "Nav": {
+    "home": "Home",
+    "search": "Search",
+    "library": "Library",
+    "rate": "Rate",
+    "signIn": "Sign in"
+  },
+  "Home": {
+    "tagline": "Read papers. See what real readers think.",
+    "searchPlaceholder": "Paste an arXiv link, DOI, or search a topic"
+  },
+  "Paper": {
+    "notesHeading": "Community notes",
+    "noNotesYet": "No notes yet on this paper.",
+    "readOnArxiv": "View on arXiv",
+    "readerPending": "Building the reader view — this can take a moment for a new paper.",
+    "readerUnavailable": "No reader view is available for this paper yet."
+  },
+  "Resolve": {
+    "pending": "Still fetching this paper for the first time — refresh in a moment.",
+    "notFound": "We couldn't find or fetch a paper for that link."
+  },
+  "Footer": {
+    "legal": "Legal",
+    "about": "About"
+  }
+}

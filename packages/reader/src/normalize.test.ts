@@ -21,6 +21,19 @@ describe("normalizeArxivHtml", () => {
     expect(doc.bodyHtml).not.toContain("<script");
   });
 
+  it("removes the paper's own duplicate <h1> title (the caller renders it once, from work metadata)", () => {
+    expect(doc.bodyHtml).not.toContain("ltx_title_document");
+    expect(doc.bodyHtml).not.toMatch(/<h1[^>]*>Attention Is All You Need/);
+  });
+
+  it("gives every <img> an alt attribute, even when the source didn't provide one", () => {
+    const imgTags = doc.bodyHtml.match(/<img\b[^>]*>/g) ?? [];
+    expect(imgTags.length).toBeGreaterThan(0);
+    for (const tag of imgTags) {
+      expect(tag).toMatch(/\salt="/);
+    }
+  });
+
   it("preserves MathML in the sanitized body", () => {
     expect(doc.bodyHtml).toContain("<math");
     expect(doc.bodyHtml).toContain("<annotation");

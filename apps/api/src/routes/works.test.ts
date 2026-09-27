@@ -148,4 +148,71 @@ describe("GET /v1/works/resolve", () => {
     );
     expect(res.status).toBe(404);
   });
+
+  // The router must not let a literal path segment like "/resolve" get captured by the
+  // dynamic "/{workId}" route (which would then 400 on the uuid validation instead of hitting
+  // the real resolve handler) — verified directly rather than assumed from Hono's docs.
+  it("still resolves the static /resolve route rather than being shadowed by /{workId}", async () => {
+    const app = buildApp({ env, db, logger, mailer, sourceFetchImpl: fixtureRouter({}) });
+    const res = await app.request("/v1/works/resolve?id=not-an-identifier");
+    expect(res.status).toBe(400);
+    const body = await json<{ code: string }>(res);
+    expect(body.code).toBe("unrecognized_identifier");
+  });
+});
+
+describe("GET /v1/works/:workId", () => {
+  const env = loadApiEnv();
+  const db = createApiDb(env);
+  const logger = pino({ enabled: false });
+  const mailer = createMailer(env);
+  const app = buildApp({ env, db, logger, mailer });
+
+  const cleanupWorkIds: string[] = [];
+
+  afterAll(async () => {
+    for (const workId of cleanupWorkIds) {
+      await db.delete(authorships).where(eq(authorships.workId, workId));
+      await db.delete(workIdentifiers).where(eq(workIdentifiers.workId, workId));
+      await db.delete(workVersions).where(eq(workVersions.workId, workId));
+      await db.delete(works).where(eq(works.id, workId));
+    }
+    await db.$client.end();
+  });
+
+  it("returns 404 for an id with no work on file", async () => {
+    const res = await app.request("/v1/works/00000000-0000-0000-0000-000000000000");
+    expect(res.status).toBe(404);
+  });
+
+  it("returns metadata, authors, identifiers, and the latest version for a real ingested work", async () => {
+    const ingestApp = buildApp({
+      env,
+      db,
+      logger,
+      mailer,
+      sourceFetchImpl: fixtureRouter({
+        "id_list=2309.10164": { status: 200, body: fixture("arxiv-atom-2309.10164.xml") },
+      }),
+    });
+    const resolveRes = await ingestApp.request("/v1/works/resolve?id=2309.10164");
+    const { workId } = await json<{ workId: string }>(resolveRes);
+    cleanupWorkIds.push(workId);
+
+    const res = await app.request(`/v1/works/${workId}`);
+    expect(res.status).toBe(200);
+    const body = await json<{
+      id: string;
+      title: string;
+      authors: { name: string }[];
+      identifiers: { scheme: string; valueNormalized: string }[];
+      latestVersion: { versionLabel: string; pdfUrl: string | null } | null;
+    }>(res);
+    expect(body.id).toBe(workId);
+    expect(body.title).toContain("Scalable Multi-Robot");
+    expect(body.authors.length).toBeGreaterThan(0);
+    expect(body.identifiers).toContainEqual({ scheme: "arxiv", valueNormalized: "2309.10164" });
+    expect(body.latestVersion?.versionLabel).toBe("v3");
+    expect(body.latestVersion?.pdfUrl).toContain("arxiv.org");
+  });
 });

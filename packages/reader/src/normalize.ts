@@ -38,6 +38,24 @@ function convertObjectImagesToImg(root: Element, document: Document): void {
   }
 }
 
+/** Every `<img>` needs an `alt` for accessibility (verified via a real Lighthouse run against a
+ * live paper page — LaTeXML doesn't always emit one). Figures already carry their meaning via
+ * their `<figcaption>` (surfaced separately in `figures`), so a blank/decorative default is
+ * correct here rather than fabricating alt text — never guess a caption that isn't there. */
+function ensureImageAltText(root: Element): void {
+  for (const img of Array.from(root.querySelectorAll("img:not([alt])"))) {
+    img.setAttribute("alt", "");
+  }
+}
+
+/** LaTeXML repeats the paper's title as an `<h1 class="ltx_title_document">` inside the article
+ * body — the caller (apps/web's paper page) already renders the title once as its own `<h1>`
+ * from the work's own metadata, so this becomes a duplicate `<h1>` plus a heading-order violation
+ * (verified via a real Lighthouse run) rather than useful content. Removed, not just demoted. */
+function removeDuplicateDocumentTitle(root: Element): void {
+  root.querySelector("h1.ltx_title_document")?.remove();
+}
+
 function rewriteRelativeUrls(root: Element, baseUrl: string): void {
   for (const img of Array.from(root.querySelectorAll("img[src]"))) {
     const src = img.getAttribute("src");
@@ -112,7 +130,9 @@ export function normalizeArxivHtml(html: string, baseUrl: string): ReaderDocumen
   }
 
   convertObjectImagesToImg(article, document);
+  removeDuplicateDocumentTitle(article);
   rewriteRelativeUrls(article, baseUrl);
+  ensureImageAltText(article);
   const outline = extractOutline(article);
   const figures = extractFigures(article, baseUrl);
   const references = extractReferences(article);
