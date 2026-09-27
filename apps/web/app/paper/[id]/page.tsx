@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { NotesOnlySection } from "@/components/notes-only-section";
+import { PaperReaderAndNotes } from "@/components/paper-reader-and-notes";
 import { apiClient } from "@/lib/api";
 
 interface PageProps {
@@ -36,13 +38,6 @@ function ScholarlyArticleJsonLd({ json }: { json: Record<string, unknown> }) {
     // biome-ignore lint/security/noDangerouslySetInnerHtml: json is our own constructed object, not user input.
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(json) }} />
   );
-}
-
-/** bodyHtml comes from apps/api's /reader endpoint, which only ever serves packages/reader's
- * sanitizeReaderHtml output — never raw source HTML. */
-function ReaderBody({ bodyHtml }: { bodyHtml: string }) {
-  // biome-ignore lint/security/noDangerouslySetInnerHtml: bodyHtml is pre-sanitized — see the doc comment above.
-  return <div className="reader-content" dangerouslySetInnerHTML={{ __html: bodyHtml }} />;
 }
 
 export default async function PaperPage({ params }: PageProps) {
@@ -95,23 +90,23 @@ export default async function PaperPage({ params }: PageProps) {
 
       <section aria-labelledby="reader-heading">
         {reader?.status === "ready" && reader.bodyHtml ? (
-          <ReaderBody bodyHtml={reader.bodyHtml} />
-        ) : reader?.status === "pending" ? (
-          <p className="text-sm text-muted-foreground">{t("readerPending")}</p>
+          <PaperReaderAndNotes workId={work.id} bodyHtml={reader.bodyHtml} />
         ) : (
-          <p className="text-sm text-muted-foreground">{t("readerUnavailable")}</p>
+          <>
+            <p className="text-sm text-muted-foreground">
+              {reader?.status === "pending" ? t("readerPending") : t("readerUnavailable")}
+            </p>
+            <hr className="my-10 border-border" />
+            <section aria-labelledby="notes-heading">
+              <h2 id="notes-heading" className="font-serif text-xl font-semibold">
+                {t("notesHeading")}
+              </h2>
+              <div className="mt-4">
+                <NotesOnlySection workId={work.id} />
+              </div>
+            </section>
+          </>
         )}
-      </section>
-
-      <hr className="my-10 border-border" />
-
-      <section aria-labelledby="notes-heading">
-        <h2 id="notes-heading" className="font-serif text-xl font-semibold">
-          {t("notesHeading")}
-        </h2>
-        {/* Real notes/ratings UI lands in M7 — packages/core's note schemas and apps/api's
-            note routes don't exist yet. */}
-        <p className="mt-2 text-sm text-muted-foreground">{t("noNotesYet")}</p>
       </section>
     </main>
   );

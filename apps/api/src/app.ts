@@ -19,6 +19,9 @@ import { createPostgresRateLimitStore, rateLimit } from "./middleware/rate-limit
 import { sessionContext } from "./middleware/session-context.js";
 import { healthRoute } from "./routes/health.js";
 import { buildMeRoutes } from "./routes/me.js";
+import { buildBlockRoutes, buildReportsRoutes } from "./routes/moderation.js";
+import { buildNoteActionsRoutes } from "./routes/note-actions.js";
+import { buildWorkNotesRoutes } from "./routes/notes.js";
 import { buildReaderRoutes } from "./routes/reader.js";
 import { versionRoute } from "./routes/version.js";
 import { buildWorksRoutes } from "./routes/works.js";
@@ -92,6 +95,10 @@ export function buildApp({ env, db, logger, mailer, sourceFetchImpl, boss }: Bui
     buildWorksRoutes(buildSourceConnectors(env, sourceFetchImpl), env.WORK_RESOLVE_TIMEOUT_MS),
   );
   v1.route("/works", buildReaderRoutes(buildObjectStore(env), boss));
+  v1.route("/works", buildWorkNotesRoutes());
+  v1.route("/notes", buildNoteActionsRoutes());
+  v1.route("/reports", buildReportsRoutes());
+  v1.route("/users", buildBlockRoutes());
 
   app.route("/v1", v1);
 

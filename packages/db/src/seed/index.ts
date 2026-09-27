@@ -6,6 +6,7 @@ import {
   authorships,
   institutions,
   persons,
+  scoringParams,
   topics,
   users,
   workIdentifiers,
@@ -15,6 +16,7 @@ import {
 } from "../schema/index.js";
 import { demoUserFixtures } from "./fixtures/demo-users.js";
 import { institutionFixtures } from "./fixtures/institutions.js";
+import { scoringParamsFixture } from "./fixtures/scoring-params.js";
 import { topicFixtures } from "./fixtures/topics.js";
 import { workFixtures } from "./fixtures/works.js";
 
@@ -247,6 +249,14 @@ async function seedWorks(db: Db, topicIdByCode: Map<string, string>): Promise<vo
   }
 }
 
+async function seedScoringParams(db: Db): Promise<void> {
+  console.info("Seeding scoring_params...");
+  await db
+    .insert(scoringParams)
+    .values({ id: generateId(), ...scoringParamsFixture })
+    .onConflictDoNothing({ target: scoringParams.version });
+}
+
 async function main() {
   const databaseUrl = process.env.DATABASE_URL;
   if (!databaseUrl) {
@@ -259,6 +269,7 @@ async function main() {
   const topicIdByCode = await seedTopics(db);
   await seedDemoUsers(db, institutionIdByRorId);
   await seedWorks(db, topicIdByCode);
+  await seedScoringParams(db);
 
   console.info("Seed complete.");
   process.exit(0);

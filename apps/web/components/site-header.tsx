@@ -2,6 +2,7 @@ import { brand } from "@repo/config/brand";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { UserNav } from "@/components/user-nav";
 
 export async function SiteHeader() {
   const t = await getTranslations("Nav");
@@ -22,9 +23,7 @@ export async function SiteHeader() {
           <Link href="/rate" className="text-muted-foreground hover:text-foreground">
             {t("rate")}
           </Link>
-          <Link href="/signin" className="text-muted-foreground hover:text-foreground">
-            {t("signIn")}
-          </Link>
+          <UserNav />
           <ThemeToggle />
         </nav>
       </div>

@@ -544,6 +544,406 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/works/{workId}/notes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    workId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Notes for this work, ordered helpful → needs more ratings → not helpful */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            data: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workId: string;
+                                /** Format: uuid */
+                                workVersionId: string | null;
+                                /** Format: uuid */
+                                authorUserId: string;
+                                type: string;
+                                body: string;
+                                anchor?: unknown;
+                                status: string;
+                                createdAt: string;
+                                ratingCounts: {
+                                    helpful: number;
+                                    somewhat: number;
+                                    not_helpful: number;
+                                };
+                                evidence: {
+                                    kind: string;
+                                    url: string | null;
+                                    label: string | null;
+                                }[];
+                                authorReply: {
+                                    body: string;
+                                    addressedInVersion: string | null;
+                                } | null;
+                            }[];
+                        };
+                    };
+                };
+            };
+        };
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    workId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /** Format: uuid */
+                        workId: string;
+                        /** Format: uuid */
+                        workVersionId?: string | null;
+                        /** @enum {string} */
+                        type: "reproduced" | "failed_to_reproduce" | "correction" | "missing_context" | "code_data_issue" | "helpful_resource";
+                        body: string;
+                        anchor?: string | number | boolean | null | {
+                            [key: string]: unknown;
+                        } | unknown[];
+                        language?: string | null;
+                        evidence: {
+                            /** @enum {string} */
+                            kind: "repository" | "log_output" | "dataset" | "citation" | "publication" | "external_link" | "upload" | "other";
+                            url?: string | null;
+                            /** Format: uuid */
+                            workId?: string | null;
+                            storageKey?: string | null;
+                            label?: string | null;
+                        }[];
+                    };
+                };
+            };
+            responses: {
+                /** @description Note created */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            workId: string;
+                            /** Format: uuid */
+                            workVersionId: string | null;
+                            /** Format: uuid */
+                            authorUserId: string;
+                            type: string;
+                            body: string;
+                            anchor?: unknown;
+                            status: string;
+                            createdAt: string;
+                            ratingCounts: {
+                                helpful: number;
+                                somewhat: number;
+                                not_helpful: number;
+                            };
+                            evidence: {
+                                kind: string;
+                                url: string | null;
+                                label: string | null;
+                            }[];
+                            authorReply: {
+                                body: string;
+                                addressedInVersion: string | null;
+                            } | null;
+                        };
+                    };
+                };
+                /** @description Invalid note */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+                /** @description Not eligible to write a note yet */
+                403: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/notes/{noteId}/ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    noteId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        value: "helpful" | "somewhat" | "not_helpful";
+                        reasons?: string[];
+                    };
+                };
+            };
+            responses: {
+                /** @description Rating recorded (created or updated) */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            status: string;
+                        };
+                    };
+                };
+                /** @description Not eligible to rate */
+                403: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+                /** @description No such note */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/notes/{noteId}/replies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    noteId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        body: string;
+                        addressedInVersion?: string | null;
+                    };
+                };
+            };
+            responses: {
+                /** @description Reply created or updated */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            body: string;
+                        };
+                    };
+                };
+                /** @description No approved author claim on this work */
+                403: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+                /** @description No such note */
+                404: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path?: never;
+                cookie?: never;
+            };
+            requestBody?: {
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        targetType: "note" | "user" | "profile";
+                        /** Format: uuid */
+                        targetId: string;
+                        reason: string;
+                        details?: string;
+                    };
+                };
+            };
+            responses: {
+                /** @description Report filed */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** Format: uuid */
+                            id: string;
+                        };
+                    };
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/users/{userId}/block": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    userId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Blocked */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+                /** @description Can't block yourself */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": unknown;
+                    };
+                };
+            };
+        };
+        delete: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    userId: string;
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description Unblocked */
+                204: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {

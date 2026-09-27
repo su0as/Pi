@@ -55,3 +55,21 @@ isn't a deployment artifact anymore.
 - If a future milestone wants faster cold starts or a smaller image (serverless-style
   deployment), revisit with a real compiled-`dist/`-for-everything pipeline then — not a reason to
   add one now.
+- **M7 corollary, verified directly**: this `.js`-resolves-to-sibling-`.ts` convention is a tsx/Node
+  behavior, not something Turbopack's `transpilePackages` replicates. `packages/core`,
+  `packages/db`, `packages/sources`, and `packages/reader` never previously had a multi-file
+  internal module that apps/web's Turbopack bundle also needed to pull in — `packages/core/src/
+  anchoring` (built for the browser-side note-anchoring UI) was the first, and split across
+  `anchor.ts`/`types.ts`/`index.ts` it reproduced apps/api's exact ADR-0006 failure, but inside
+  Turbopack instead of plain `node` (`Module not found: Can't resolve './anchor.js'`, confirmed live
+  in the dev server). A `turbopack.resolveAlias` per-file workaround was tried and rejected: relative
+  alias values resolve relative to the Next.js app root, not the importing file's directory, so it
+  needs a fragile absolute-ish path per file, and the alias key (`"./anchor.js"`) is global across
+  the whole Turbopack graph, not scoped to the importing package. The actual fix was to keep any
+  module under `packages/*` that apps/web imports directly (not just transitively through
+  apps/api/apps/worker) as a single file with zero internal relative imports — `anchor.ts` now
+  contains its own selector types instead of importing them from a sibling `types.ts`, and
+  `packages/core`'s `"./anchoring"` export and main barrel both point at `anchor.ts` directly with
+  no `index.ts` re-export hop. Apply the same "one file, no internal relative imports" shape to any
+  future `packages/core` (or `packages/reader`) submodule that apps/web needs to import for
+  client-side use.

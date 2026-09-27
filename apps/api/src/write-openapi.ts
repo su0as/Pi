@@ -11,6 +11,9 @@ import type { Mailer } from "./mailer.js";
 import { validationHook } from "./middleware/error-handler.js";
 import { healthRoute } from "./routes/health.js";
 import { buildMeRoutes } from "./routes/me.js";
+import { buildBlockRoutes, buildReportsRoutes } from "./routes/moderation.js";
+import { buildNoteActionsRoutes } from "./routes/note-actions.js";
+import { buildWorkNotesRoutes } from "./routes/notes.js";
 import { buildReaderRoutes } from "./routes/reader.js";
 import { versionRoute } from "./routes/version.js";
 import { buildWorksRoutes } from "./routes/works.js";
@@ -44,6 +47,10 @@ function buildSpecOnlyApp() {
   v1.route("/me", buildMeRoutes(noopMailer));
   v1.route("/works", buildWorksRoutes(specConnectors, 10_000));
   v1.route("/works", buildReaderRoutes(noopObjectStore));
+  v1.route("/works", buildWorkNotesRoutes());
+  v1.route("/notes", buildNoteActionsRoutes());
+  v1.route("/reports", buildReportsRoutes());
+  v1.route("/users", buildBlockRoutes());
 
   const app = new OpenAPIHono<AppEnv>();
   app.route("/v1", v1);

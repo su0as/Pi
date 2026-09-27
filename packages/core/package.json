@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
+    "./anchoring": "./src/anchoring/anchor.ts",
     "./identifiers": "./src/identifiers/index.ts",
     "./schemas": "./src/schemas/index.ts",
     "./permissions": "./src/permissions/index.ts"
